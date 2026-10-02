@@ -1,0 +1,51 @@
+ROLE
+You are a principal product designer and senior front-end engineer who ships award-level (Awwwards / Linear / Vercel / 21st.dev caliber) portfolio sites. Build a statically deployable portfolio that feels like a 2026 flagship product launch, not a template.
+
+STACK
+Vite + React 18 + TypeScript, Tailwind CSS, shadcn/ui primitives, Framer Motion (motion), Lucide icons, optional Lenis smooth scroll. Output must be 100% static (vite build -> /dist), deployable to GitHub Pages / Netlify / Vercel with zero backend. Provide full file tree and every file's code.
+
+OWNER
+[Full name] - [Software Engineer & Information Systems Administrator]. Computer science student at [KNRTU, Kazan], focus: [web development, systems administration]. Tagline: "[one-line value proposition]". Location: [City]. Status: [Open to internships / freelance].
+
+DESIGN LANGUAGE
+• Dark-first with a refined light theme; toggle with system-preference default and no flash on load.
+• Bento-grid layout, glass cards with 1px gradient borders, soft inner glows, subtle noise texture, aurora/mesh-gradient hero backdrop, one restrained accent gradient [indigo -> cyan].
+• Geist or Inter (UI) + Geist Mono / JetBrains Mono (labels, code). Fluid type via clamp(), tight heading tracking, generous whitespace.
+• Custom icon system: Lucide at one consistent stroke weight; tech-stack logos as monochrome SVGs that colorize on hover. No emojis.
+• Tokens as CSS variables (color, radius, spacing, blur) so the whole theme can be swapped in one place.
+
+SIGNATURE FEATURE: CV DOWNLOAD EXPERIENCE
+Make this the most memorable part of the site, and offer it in several places:
+1. Hero CTA "Download CV" (primary button) with a magnetic hover and an animated arrow-to-tray icon.
+2. A dedicated "Résumé" bento card showing a 3D-tilting paper preview of the CV (page-peel on hover), "Updated [Month Year]" badge, file size, and format.
+3. A click-through micro-sequence: a terminal-style line types $ build cv --format=pdf, a progress ring fills, a success check with subtle confetti, then the file downloads.
+4. Format picker in a popover: Designed PDF, ATS-friendly plain PDF, and a .vcf "Save my contact" card. All use real <a href download> pointing to /assets/[name]-CV.pdf and friends.
+5. Floating pill that appears after the hero scrolls out: "Download CV", with a quick-actions menu.
+6. Command palette (Cmd/Ctrl+K) with actions: Download CV, Copy email, Open GitHub, Jump to Projects, Toggle theme.
+7. A QR code (generated client-side) linking to the CV, shown in a "Take it with you" modal.
+8. Fully accessible: focus management, aria-live status text, works without JS via the plain download link.
+
+SECTIONS
+1. Hero: name with text-reveal, role cycler, availability badge with pulsing dot, CTAs (View projects, Download CV, Contact), animated scroll cue.
+2. About: concise bio, animated count-up stats, a small "currently" widget (learning / building / reading).
+3. Skills as bento: Software (languages, frameworks, databases, APIs, testing) and IS Administration (Linux/Windows Server, networking, virtualization, cloud, security, monitoring, backups, ITIL/DevOps). Each tile has an icon, proficiency shown as a subtle meter, and hover detail.
+4. Projects: 4-6 featured cards with cover, problem -> solution -> outcome, stack chips, and real [Live] and [Source] buttons; a filter bar (All / Web / Systems / Academic) with animated layout transitions; a case-study modal for each.
+5. Experience and education timeline: [KNRTU, Department of Intelligent Systems and Information Resource Management], internships, leadership roles ([Chairman, student association]).
+6. Certifications and achievements as a scrolling marquee of badges.
+7. Testimonials / references: carousel with a "Request references" mailto link.
+8. Contact: large icon links (Email, GitHub, LinkedIn, Telegram, WhatsApp), copy-to-clipboard email with toast, a validated mailto-based or Formspree-ready form, footer with local time and "Built with ..." line.
+
+INTERACTION POLISH
+Staggered scroll reveals, cursor spotlight on cards, subtle 3D tilt, magnetic buttons, animated underline links, active-section nav highlighting, floating blurred pill navbar that becomes a full-screen mobile menu, page-load intro, custom scrollbar, view-transition feel between filters. All motion honors prefers-reduced-motion.
+
+RESPONSIVE
+Mobile-first and tested at 360, 390, 768, 1024, 1440, 1920 px. Single-column bento on mobile, 44px+ tap targets, no horizontal scroll, dvh units, safe-area insets, thumb-reachable nav and CV button on phones.
+
+LINKS
+Every link is a real <a> with descriptive text; external links use target="_blank" rel="noopener noreferrer"; visible focus rings; hover/active states. Use clearly marked placeholder URLs I can replace in one data/content.ts file that drives the whole site (name, links, projects, skills, timeline, CV paths).
+
+QUALITY BAR
+Semantic HTML, ARIA, WCAG AA contrast, keyboard navigable, Lighthouse 95+ in all categories, no layout shift, lazy-loaded media, code-split heavy components. SEO: title, meta description, Open Graph/Twitter cards, JSON-LD Person schema, favicon set, sitemap/robots.
+
+OUTPUT
+1. File tree. 2) Every file in full. 3) Setup and deploy steps (GitHub Pages config included). 4) A short checklist of what to replace (content, CV file, photos, colors).

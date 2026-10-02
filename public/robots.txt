@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nate-zm.github.io/Portfolio/sitemap.xml
