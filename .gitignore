@@ -6,3 +6,30 @@ playwright-report
 .npm-cache
 .tools
 preview.png
+
+# Local prompts and agent workspace files
+prompt
+prompt.*
+prompts/
+.agents/
+.codex/
+
+# Local environment settings (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Logs and test coverage
+*.log
+coverage/
+
+# Editor and operating system artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
