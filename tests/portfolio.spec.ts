@@ -1,4 +1,50 @@
 import { test, expect } from '@playwright/test';
+
+test('hero greeting fits phones, tablets, and desktops in both themes',async({browser})=>{
+ const devices=[
+  {width:320,height:568,touch:true},{width:360,height:800,touch:true},
+  {width:390,height:844,touch:true},{width:430,height:932,touch:true},
+  {width:844,height:390,touch:true},{width:768,height:1024,touch:true},
+  {width:1024,height:768,touch:true},{width:1280,height:800,touch:false},
+  {width:1440,height:900,touch:false},{width:1920,height:1080,touch:false},
+ ];
+ for(const device of devices){
+  const context=await browser.newContext({viewport:device,hasTouch:device.touch,reducedMotion:'reduce'});
+  const page=await context.newPage();
+  const errors:string[]=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto('http://127.0.0.1:5173');
+  await page.evaluate(()=>document.fonts.ready);
+  for(const theme of ['dark','light']){
+   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+   await expect(page.locator('.hero-intro')).toHaveText('HELLO WORLD, I’M NATHANAEL NYIRENDA');
+   await expect(page.locator('.hero-present')).toHaveText('I present to you');
+   const layout=await page.evaluate(()=>{
+    const intro=document.querySelector('.hero-intro')!.getBoundingClientRect();
+    const present=document.querySelector('.hero-present')!.getBoundingClientRect();
+    const heading=document.querySelector('h1')!.getBoundingClientRect();
+    const text=document.querySelector('.hero-intro > span')!.getBoundingClientRect();
+    return {overflow:document.documentElement.scrollWidth>innerWidth,
+     singleLine:intro.height<20,textFits:text.right<=intro.right+1,
+     ordered:intro.bottom<=present.top&&present.bottom<=heading.top,
+     colors:[...document.querySelectorAll('[class*=intro-code]')].map(el=>getComputedStyle(el).color)};
+   });
+   expect(layout.overflow,`${device.width}px ${theme}`).toBe(false);
+   expect(layout.singleLine).toBe(true);
+   expect(layout.textFits).toBe(true);
+   expect(layout.ordered).toBe(true);
+   expect(layout.colors[0]).not.toBe(layout.colors[1]);
+  }
+  if(device.width<768){
+   await page.getByRole('button',{name:'Open navigation'}).click();
+   await expect(page.getByRole('dialog')).toBeVisible();
+   await page.getByRole('dialog').getByRole('link',{name:'Projects',exact:true}).click();
+   await expect(page.getByRole('dialog')).toHaveCount(0);
+  }
+  expect(errors).toEqual([]);
+  await context.close();
+ }
+});
 test('mobile connection notes use the full width with controls below',async({page})=>{
  await page.goto('http://127.0.0.1:5173');
  for(const width of [360,384,412,430]){
