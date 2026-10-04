@@ -88,3 +88,6 @@
  .project-card .cover-button .atlas-ui{--display-scale:.64;transform:perspective(900px) rotateY(-8deg) rotateX(5deg) scale(var(--display-scale))}
  .project-card .cover-button:hover .mock-window,.project-card .cover-button:hover .pulse-ui,.project-card .cover-button:hover .atlas-ui,.project-card .cover-button:hover .terminal-ui{transform:perspective(900px) rotateY(0) rotateX(0) scale(var(--display-scale))}
 }
+
+.timeline-dot.in-progress{left:-33px;top:2px;width:15px;height:15px;background:transparent;border:2px solid color-mix(in srgb,var(--accent) 25%,transparent);border-top-color:var(--accent);animation:timeline-progress-spin 1.2s linear infinite}
+@keyframes timeline-progress-spin{to{transform:rotate(360deg)}}
