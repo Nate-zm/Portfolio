@@ -2,6 +2,9 @@ BEGIN:VCARD
 VERSION:3.0
 FN:Nathanael Nyirenda
 N:Nyirenda;Nathanael;;;
+TEL;TYPE=CELL:+79874226650
+TEL;TYPE=CELL:+260776612267
+URL:https://www.linkedin.com/in/nathanael-nyirenda-5756721b7
 EMAIL:n8.vision.00@gmail.com
 TITLE:Software Engineer and Systems Administrator
 NOTE:Software engineering and systems administration
