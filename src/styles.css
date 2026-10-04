@@ -91,3 +91,6 @@
 
 .timeline-dot.in-progress{left:-33px;top:2px;width:15px;height:15px;background:transparent;border:2px solid color-mix(in srgb,var(--accent) 25%,transparent);border-top-color:var(--accent);animation:timeline-progress-spin 1.2s linear infinite}
 @keyframes timeline-progress-spin{to{transform:rotate(360deg)}}
+
+.timeline{border-left-color:transparent}
+.timeline-item:not(:last-child)::before{content:"";position:absolute;left:-26px;top:21px;bottom:3px;width:1px;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--border) 22px,var(--border) calc(100% - 22px),transparent)}
