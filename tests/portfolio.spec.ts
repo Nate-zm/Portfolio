@@ -1,5 +1,33 @@
 import { test, expect } from '@playwright/test';
 
+test('mobile floating CV hides around both CV sections and returns between them',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('http://127.0.0.1:5173');
+ for(const width of [320,390,430,767]){
+  await page.setViewportSize({width,height:844});
+  const floating=page.locator('.floating-cv');
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await expect(floating).toHaveCount(0);
+  await page.locator('#skills').scrollIntoViewIfNeeded();
+  await expect(floating).toBeVisible();
+  await page.locator('.resume-actions').scrollIntoViewIfNeeded();
+  await expect(floating).toHaveCount(0);
+  await page.locator('#contact').scrollIntoViewIfNeeded();
+  await expect(floating).toBeVisible();
+  await page.locator('.resume-actions').scrollIntoViewIfNeeded();
+  await expect(floating).toHaveCount(0);
+  await page.locator('#skills').scrollIntoViewIfNeeded();
+  await expect(floating).toBeVisible();
+ }
+ await page.locator('.resume-actions').scrollIntoViewIfNeeded();
+ await expect(page.locator('.floating-cv')).toHaveCount(0);
+ await page.setViewportSize({width:1024,height:844});
+ await expect(page.locator('.floating-cv')).toBeVisible();
+ await page.setViewportSize({width:390,height:844});
+ await page.locator('.resume-actions').scrollIntoViewIfNeeded();
+ await expect(page.locator('.floating-cv')).toHaveCount(0);
+});
+
 test('contact popup downloads a vCard and keeps CV downloads as PDF',async({page})=>{
  await page.goto('http://127.0.0.1:5173');
  let downloads=0;
