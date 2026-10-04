@@ -1,5 +1,72 @@
 import { test, expect } from '@playwright/test';
 
+test('contact popup downloads a vCard and keeps CV downloads as PDF',async({page})=>{
+ await page.goto('http://127.0.0.1:5173');
+ let downloads=0;
+ page.on('download',()=>downloads++);
+ for(const [area,width] of [['.hero-ctas',390],['.resume-actions',1440]] as const){
+  await page.setViewportSize({width,height:900});
+  const actions=page.locator(area);
+  const before=downloads;
+  await actions.getByRole('button',{name:'More download options'}).click();
+  await page.getByRole('button',{name:'Save my contact',exact:true}).click();
+  const dialog=page.getByRole('dialog');
+  await expect(dialog).toContainText('Save my contact');
+  await expect(dialog).toContainText('n8.vision.00@gmail.com');
+  expect(downloads).toBe(before);
+  const contactPromise=page.waitForEvent('download');
+  await dialog.getByRole('link',{name:'Download contact (.vcf)'}).click();
+  const contact=await contactPromise;
+  expect(contact.suggestedFilename()).toBe('Nathanael Nyirenda.vcf');
+  const {readFile}=await import('node:fs/promises');
+  expect(await readFile((await contact.path())!)).toEqual(await readFile('public/assets/your-name.vcf'));
+  await dialog.getByRole('button',{name:'Close dialog'}).click();
+  await expect(dialog).toHaveCount(0);
+  const pdfPromise=page.waitForEvent('download');
+  await actions.getByRole('link',{name:'Download CV',exact:true}).click();
+  const pdf=await pdfPromise;
+  expect(pdf.suggestedFilename()).toBe('Nathanael Nyirenda resume.pdf');
+  expect(await readFile((await pdf.path())!)).toEqual(await readFile('public/assets/Nathanael Nyirenda resume.pdf'));
+ }
+});
+
+test('download menus and popups fit phones, tablets, and desktops',async({page})=>{
+ test.setTimeout(120000);
+ const errors:string[]=[];
+ page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('http://127.0.0.1:5173');
+ for(const [width,height] of [[320,568],[360,800],[390,844],[430,932],[844,390],[768,1024],[1024,768],[1280,800],[1440,900],[1920,1080]]){
+  await page.setViewportSize({width,height});
+  for(const theme of ['dark','light']){
+   await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);
+   for(const area of ['.hero-ctas','.resume-actions','.floating-cv']){
+    const actions=page.locator(area);
+    if(area==='.floating-cv')await page.locator('footer').scrollIntoViewIfNeeded();
+    await actions.getByRole('button',{name:'More download options'}).click();
+    await page.getByRole('button',{name:'Save my contact',exact:true}).click();
+    const dialog=page.getByRole('dialog');
+    await expect(dialog).toBeVisible();
+    const button=dialog.getByRole('link',{name:'Download contact (.vcf)'});
+    await expect(button).toBeVisible();
+    const bounds=await button.boundingBox();
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x+bounds!.width).toBeLessThanOrEqual(width);
+    await dialog.getByRole('button',{name:'Close dialog'}).click();
+    await expect(dialog).toHaveCount(0);
+    await actions.getByRole('button',{name:'More download options'}).click();
+    await page.getByRole('button',{name:'Take it with you'}).click();
+    await expect(dialog.locator('.qr svg')).toBeVisible();
+    await dialog.getByRole('link',{name:'Download CV instead'}).scrollIntoViewIfNeeded();
+    await expect(dialog.getByRole('link',{name:'Download CV instead'})).toHaveAttribute('href',/resume\.pdf\?v=/);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toHaveCount(0);
+   }
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  }
+ }
+ expect(errors).toEqual([]);
+});
+
 test('hero greeting fits phones, tablets, and desktops in both themes',async({browser})=>{
  const devices=[
   {width:320,height:568,touch:true},{width:360,height:800,touch:true},
