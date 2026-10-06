@@ -111,3 +111,48 @@
 .phone-contact-icon,.phone-contact-details,.phone-contact>svg{position:relative;z-index:1}
 .phone-ripple{position:absolute;z-index:0;pointer-events:none;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);background:radial-gradient(circle,transparent 48%,color-mix(in srgb,var(--accent) 7%,transparent) 70%,color-mix(in srgb,var(--accent) 24%,transparent) 91%,color-mix(in srgb,var(--text) 22%,transparent) 97%,transparent 100%);box-shadow:inset 0 2px 5px color-mix(in srgb,var(--text) 20%,transparent),inset 0 -3px 8px color-mix(in srgb,var(--accent) 30%,transparent),0 4px 12px #0002;animation:phone-ripple-expand 850ms cubic-bezier(.16,1,.3,1) forwards}
 @keyframes phone-ripple-expand{0%{transform:scale(0);opacity:.9}65%{opacity:.55}100%{transform:scale(1);opacity:0}}
+
+@media(min-width:768px){
+ .nav-shell{transition:top .2s ease,border-radius .2s ease}
+ .header-scrolled .nav-shell{top:0;border-top-left-radius:0;border-top-right-radius:0}
+ .nav-shell{position:fixed;background:color-mix(in srgb,var(--surface) 68%,transparent);-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%);border-color:color-mix(in srgb,var(--text) 14%,transparent);box-shadow:0 8px 30px #00000012,inset 0 1px 0 color-mix(in srgb,var(--text) 6%,transparent)}
+}
+
+@media(min-width:768px) and (prefers-reduced-motion:reduce){.nav-shell{transition:none}}
+
+:root{--muted:#a5aab9}
+:root[data-theme=light]{--muted:#565d70}
+.small{font-size:12px}
+.hero-description{font-size:16px;max-width:540px;line-height:1.8}
+.primary-role{font-size:17px;font-weight:600;color:var(--text);margin-bottom:4px}
+.role-line{font-size:13px;color:var(--muted);min-height:28px;margin-bottom:18px}
+.section{padding-top:82px}
+.desktop-nav a{position:relative;padding-block:8px;font-size:13px}
+.desktop-nav a.active{color:var(--accent)}
+.desktop-nav a.active:after{position:absolute;bottom:0;left:0;width:100%;height:2px;border-radius:2px;margin:0}
+.skill-card p,.project-info>p,.currently-item p{font-size:14px;line-height:1.75}
+.project-card .project-cover{height:290px;padding:22px}
+.project-card .project-image-frame{width:100%;transform:none}
+.project-card .project-image img{width:100%;height:100%;object-fit:contain;box-shadow:0 8px 24px #0003}
+.project-card .cover-button:hover .project-image-frame{transform:scale(1.025)}
+.project-image-link{margin-bottom:24px;font-size:13px}
+.references-summary{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px}
+.references-summary h3{font-size:23px;margin-bottom:10px}
+.references-summary p:last-child{margin-bottom:0;font-size:14px}
+.references-summary .button{flex-shrink:0}
+.badge{font-size:12px}
+@media(max-width:767px){
+ .section{padding-top:60px}
+ .hero-description{font-size:14px}
+ .primary-role{font-size:16px}
+ .role-line{font-size:12px}
+ .references-summary{align-items:flex-start;flex-direction:column;padding:24px}
+ .project-card .project-cover{height:210px;padding:16px}
+}
+@media(prefers-reduced-motion:reduce){.project-card .cover-button:hover .project-image-frame{transform:none}}
+
+
+.skill-overview{margin-top:20px}
+.skill-overview-label{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;color:var(--muted);margin-bottom:8px}
+.skill-overview-label strong{font-size:12px;font-weight:500;color:var(--accent)}
+.skill-overview .skill-meter{height:5px;margin:0}
