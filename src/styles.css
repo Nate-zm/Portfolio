@@ -147,7 +147,8 @@
  .primary-role{font-size:16px}
  .role-line{font-size:12px}
  .references-summary{align-items:flex-start;flex-direction:column;padding:24px}
- .project-card .project-cover{height:210px;padding:16px}
+ .project-card .cover-button{aspect-ratio:4/3}
+ .project-card .cover-button .project-cover{position:absolute;inset:0;height:100%;padding:12px}
 }
 @media(prefers-reduced-motion:reduce){.project-card .cover-button:hover .project-image-frame{transform:none}}
 
