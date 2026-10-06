@@ -3,7 +3,7 @@
 Place your project screenshots here. Suggested filenames:
 
 - zamket.png  -  e-commerce website
-- Nicecream.png - Nicecream design for Premium Foods Manufacturing Ltd × Shoprite
+- Nicecream.jpg - Nice Cream (Shoprite × Premium Foods) and Kreemy Kup (Premium Foods Manufacturing Limited)
 - portfolio.png  -  portfolio website
 
 Deploy keeps its existing illustrated terminal cover; no deploy image is required.
