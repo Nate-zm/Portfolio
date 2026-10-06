@@ -53,8 +53,8 @@ test('contact popup downloads a vCard and keeps CV downloads as PDF',async({page
   const pdfPromise=page.waitForEvent('download');
   await actions.getByRole('link',{name:'Download CV',exact:true}).click();
   const pdf=await pdfPromise;
-  expect(pdf.suggestedFilename()).toBe('Nathanael Nyirenda resume.pdf');
-  expect(await readFile((await pdf.path())!)).toEqual(await readFile('public/assets/Nathanael Nyirenda resume.pdf'));
+  expect(pdf.suggestedFilename()).toBe('Nathanael Nyirenda CV.pdf');
+  expect(await readFile((await pdf.path())!)).toEqual(await readFile('public/assets/Nathanael Nyirenda CV.pdf'));
  }
 });
 
@@ -85,7 +85,7 @@ test('download menus and popups fit phones, tablets, and desktops',async({page})
     await page.getByRole('button',{name:'Take it with you'}).click();
     await expect(dialog.locator('.qr svg')).toBeVisible();
     await dialog.getByRole('link',{name:'Download CV instead'}).scrollIntoViewIfNeeded();
-    await expect(dialog.getByRole('link',{name:'Download CV instead'})).toHaveAttribute('href',/resume\.pdf\?v=/);
+    await expect(dialog.getByRole('link',{name:'Download CV instead'})).toHaveAttribute('href',/CV\.pdf\?v=/);
     await page.keyboard.press('Escape');
     await expect(dialog).toHaveCount(0);
    }

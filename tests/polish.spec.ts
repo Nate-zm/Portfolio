@@ -43,12 +43,12 @@ test('CV download starts immediately and view option opens the same PDF',async({
  await page.goto('http://127.0.0.1:5173');
  const actions=page.locator('.hero-ctas');
  await actions.getByRole('button',{name:'More download options'}).click();
- await expect(page.getByRole('link',{name:'View CV',exact:true})).toHaveAttribute('href',/resume\.pdf\?v=/);
+ await expect(page.getByRole('link',{name:'View CV',exact:true})).toHaveAttribute('href',/CV\.pdf\?v=/);
  await expect(page.getByRole('link',{name:'View CV',exact:true})).toHaveAttribute('target','_blank');
  await page.keyboard.press('Escape');
  const download=page.waitForEvent('download');
  await actions.getByRole('link',{name:'Download CV',exact:true}).click();
  await expect(actions.getByRole('link',{name:'Download started',exact:true})).toBeVisible();
- expect((await download).suggestedFilename()).toBe('Nathanael Nyirenda resume.pdf');
+ expect((await download).suggestedFilename()).toBe('Nathanael Nyirenda CV.pdf');
  await expect(page.locator('.build-status')).toHaveCount(0);
 });

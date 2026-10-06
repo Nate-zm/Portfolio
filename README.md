@@ -18,7 +18,7 @@ npm run preview
 ## Personalize before publishing
 
 - Update `src/data/content.ts`: name, initials, bio, location, timezone, email, social URLs, actual skills, projects, education, leadership, achievements, references, and CV paths.
-- The CV download uses `public/assets/Nathanael Nyirenda resume.pdf`. Replace that file to update your CV, or change its path in `src/data/content.ts`. The contact download uses `your-name.vcf`. The displayed paper is a stylized preview, not a rendering of the PDF.
+- The CV download uses `public/assets/Nathanael Nyirenda CV.pdf`. Replace that file to update your CV, or change its path in `src/data/content.ts`. The contact download uses `your-name.vcf`. The displayed paper is a stylized preview, not a rendering of the PDF.
 - Replace every `example.com`, `YOUR_USERNAME`, and zero-number WhatsApp link. Live/source buttons currently point to clearly marked placeholder URLs.
 - Add project images in `public/assets/projects/`. Edit each project's `name` and `image` in `src/data/content.ts` (for example, `image: 'assets/projects/orbit.jpg'`). Missing or blank images keep the illustrated preview. Images fit inside the original padded covers without cropping; case-study dialogs show the full image.
 - Change the title, description, Open Graph and Twitter metadata in `index.html`; use an absolute production image URL and a raster social card for widest platform compatibility. Replace favicon/social artwork. Add PNG/apple-touch icons if needed.
