@@ -1,5 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
-import { mkdir, writeFile, readFile, readdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { exportSource } from './export-source.mjs';
 await mkdir('public/assets',{recursive:true});
 for (const designed of [true,false]) {
  const pdf=await PDFDocument.create();const page=pdf.addPage([595,842]);const font=await pdf.embedFont(StandardFonts.Helvetica);const bold=await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -13,6 +14,5 @@ await writeFile('public/assets/your-name.vcf','BEGIN:VCARD\r\nVERSION:3.0\r\nFN:
 const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#11141d"/><text x="9" y="43" font-family="sans-serif" font-weight="bold" font-size="27" fill="#aaa1ff">NN</text></svg>';
 await writeFile('public/favicon.svg',svg);
 await writeFile('public/social.svg','<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#090b11"/><circle cx="1000" cy="320" r="240" stroke="#7771b8" stroke-opacity=".25" fill="none"/><text x="90" y="150" fill="#a8a2ee" font-family="sans-serif" font-size="22">NATHANAEL NYIRENDA / SOFTWARE &amp; SYSTEMS</text><text x="85" y="295" fill="#f0f1f6" font-family="sans-serif" font-size="88">Engineering</text><text x="85" y="395" fill="#a8a2ee" font-family="sans-serif" font-size="88">with intention.</text><text x="90" y="510" fill="#959aab" font-family="sans-serif" font-size="25">Web development, systems administration, and design.</text></svg>');
-// Deliver the requested full file tree and source in a reviewable artifact.
-async function walk(dir=''){const out=[];for(const item of await readdir(dir||'.',{withFileTypes:true})){const path=dir?`${dir}/${item.name}`:item.name;if(['node_modules','dist','.git','.tools','.npm-cache','test-results','playwright-report'].includes(item.name)||['SOURCE.md','preview.png'].includes(item.name)||item.name.endsWith('.tsbuildinfo'))continue;if(item.isDirectory())out.push(...await walk(path));else out.push(path)}return out}
-const files=await walk();let source='# File tree and complete source\n\n```text\n'+files.join('\n')+'\n```\n';for(const file of files.filter(f=>/\.(tsx?|css|js|mjs|json|html|yml|md|txt|xml|svg|vcf)$/.test(f)&&f!=='package-lock.json'))source+=`\n## ${file}\n\n\`\`\`\n${await readFile(file,'utf8')}\n\`\`\`\n`;await writeFile('SOURCE.md',source);
+// Only reviewed, tracked source files are included.
+await exportSource();

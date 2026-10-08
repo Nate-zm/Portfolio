@@ -13,6 +13,13 @@ prompt.*
 prompts/
 .agents/
 .codex/
+.aws/
+credentials.json
+secrets.json
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Local environment settings (keep shareable examples)
 .env

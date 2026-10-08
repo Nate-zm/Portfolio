@@ -153,7 +153,9 @@ test('references summary fits mobile screens',async({page})=>{
 });
 
 test('responsive layout, project filter, dialogs, theme, and downloads',async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('http://127.0.0.1:5173');
+ await page.evaluate(()=>document.fonts.ready);
  await expect(page.getByRole('heading',{name:/Engineering/})).toBeVisible();
  for(const width of [360,390,768,1024,1440,1920]){await page.setViewportSize({width,height:900});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)}
  await page.getByRole('button',{name:'Web',exact:true}).click();
