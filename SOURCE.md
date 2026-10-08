@@ -854,7 +854,7 @@ img,video{max-width:100%;height:auto}
 }
 .skill-swipe-hint{display:none}
 @media(max-width:767px){
- #skills .skills-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(85%,320px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:4px 2px 16px;scroll-padding-inline:2px}
+ #skills .skills-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(85%,320px);gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:4px 2px 16px;scroll-padding-inline:2px}
  #skills .skills-grid .skill-card{grid-column:auto;scroll-snap-align:start;min-width:0}
  #skills .skill-swipe-hint{display:flex;align-items:center;gap:8px;font-size:10px;margin-bottom:14px}
  #skills .skills-grid::-webkit-scrollbar{height:4px}
