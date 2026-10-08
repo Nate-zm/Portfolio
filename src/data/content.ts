@@ -2,7 +2,7 @@
 export const content = {
   name: 'Nathanael Nyirenda', initials: 'NN', role: 'Software Engineer', secondaryRole: 'Information Systems Administrator',
   roles: ['Software Engineer', 'Information Systems Administrator', 'UI/UX Designer', 'Graphic Designer', 'DevOps Engineer'],
-  tagline: 'I’m Nathanael, a software engineer based in Lusaka. I build web applications, manage IT systems, and create visual designs.', bio: 'I’m a KNRTU graduate with a background in computer science. I work across web development, systems administration, and design. I like figuring out how things work, solving practical problems, and making things people enjoy using.',
+  tagline: 'I’m Nathanael, a software engineer based in Lusaka. I build web applications, manage IT systems, and create visual designs.', bio: 'I’m a KNRTU graduate with a background in computer science. I work across web development, systems administration, and design. I like figuring out how things work, solving practical problems, and making things people enjoy using. I build and manage websites, keeping them updated and running smoothly.',
   location: 'Lusaka, Zambia', timezone: 'Africa/Lusaka', status: 'Open to internships & freelance', email: 'n8.vision.00@gmail.com', phones: ['+79874226650', '+260776612267'], updated: 'October 2026',
   links: { github:'https://github.com/Nate-zm', linkedin:'https://www.linkedin.com/in/nathanael-nyirenda-5756721b7', telegram:'https://t.me/Nate_zm', whatsapp:'https://wa.me/260776612267' },
   cv: [{label:'CV (PDF)',path:'assets/Nathanael Nyirenda CV.pdf?v=7d297cbb4074',format:'PDF'}, {label:'Save my contact',path:'assets/your-name.vcf',format:'VCF'}],
